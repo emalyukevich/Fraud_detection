@@ -24,7 +24,7 @@ def get_important_features_by_corr(df, target_col='Class', threshold=0.1, exclud
 
     return important_features.index.tolist() if exclude_target else important_features
 
-def find_best_threshold(y_true, scores, target_recall, verbose=False):
+def find_best_threshold(y_true, scores, target_recall, direction='lower', verbose=False):
     """
     Находит оптимальный порог для бинарной классификации на основе метрик precision, recall и F1.
     Минимизирует false positives при достижении целевого recall.
@@ -48,7 +48,12 @@ def find_best_threshold(y_true, scores, target_recall, verbose=False):
     best = {'threshold': None, 'precision': 0, 'recall': 0, 'f1': 0}
     
     for t in thresholds:
-        preds = (scores < t).astype(int)
+        if direction == 'lower':
+            preds = (scores < t).astype(int)
+        elif direction == 'higher':
+            preds = (scores >= t).astype(int)
+        else:
+            raise ValueError("Direction must be 'lower' or 'higher'")
         
         if np.sum(preds) == 0:
             continue
@@ -63,7 +68,20 @@ def find_best_threshold(y_true, scores, target_recall, verbose=False):
             if verbose:
                 print(f"New best: Thresh={t:.3f} | Prec={p:.3f} | Rec={r:.3f} | F1={f1:.3f}")
 
-    if verbose and best['threshold'] is None:
-        print(f"Warning: Target recall {target_recall} not achieved (max recall: {np.max([r for t in thresholds])})")
-
     return best
+
+def add_anomaly_score(X, ocsvm_model):
+    """
+    Добавляет оценку аномальности (anomaly_score) к данным с помощью обученной OneClassSVM модели.
+    Возвращает копию DataFrame с новым признаком 'anomaly_score'.
+
+    Parameters:
+    - X (pd.DataFrame)
+    - ocsvm_model (sklearn.OneClassSVM): Обученная модель OneClassSVM.
+
+    Returns:
+    - pd.DataFrame: Копия входных данных с добавленным столбцом 'anomaly_score'.
+    """
+    X = X.copy()
+    X['anomaly_score'] = ocsvm_model.decision_function(X)
+    return X
