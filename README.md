@@ -37,6 +37,8 @@ project-root/
 ├── README.md
 └── .gitignore
 
+```
+
 ---
 
 ## 🧠 Методы и инструменты
@@ -83,7 +85,7 @@ jupyter notebook notebooks/03_Baseline_Classification_Model.ipynb
 
 4. Проверь финальные метрики:
 jupyter notebook notebooks/04_Final_Model_Evaluation.ipynb
-
+```
 ---
 
 ## 🔭 Возможности для расширения
