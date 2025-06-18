@@ -1,20 +1,22 @@
 # 💳 Credit Card Fraud Detection — Advanced ML Project
 
-Проект по выявлению мошеннических транзакций с использованием **unsupervised learning**, **ансамблей моделей** и **оптимизации порога классификации**. Структура и подходы ориентированы на реальный банковский use-case.
+A project aimed at detecting fraudulent transactions using **unsupervised learning**, **model ensembles**, and **threshold optimization**. The structure and methods are tailored to real-world banking use cases.
 
 ---
 
-## 📌 Цели проекта
+---
 
-- 📉 Выявить мошеннические транзакции в условиях сильного дисбаланса классов  
-- 🔍 Использовать **One-Class SVM** как основу для поиска аномалий  
-- 🧠 Собрать **ансамбль моделей** для усиления предсказаний  
-- 🛡 Минимизировать **ложноотрицательные (False Negatives)**  
-- 🧱 Реализовать **модульную архитектуру**, пригодную для деплоя и масштабирования
+## 📌 Project Goals
+
+- 📉 Detect fraudulent transactions under extreme class imbalance  
+- 🔍 Leverage **One-Class SVM** for anomaly detection  
+- 🧠 Build a **model ensemble** to enhance predictions  
+- 🛡 Minimize **False Negatives (FN)** to prevent fraud losses  
+- 🧱 Implement a **modular architecture** suitable for deployment and scaling
 
 ---
 
-## 🗂️ Структура проекта
+## 🗂️ Project Structure
 
 ```bash
 project-root/
@@ -37,94 +39,101 @@ project-root/
 ├── README.md
 └── .gitignore
 
----
-
-## 🧠 Методы и инструменты
-
-| Категория           | Используемые методы                                             |
-|---------------------|----------------------------------------------------------------|
-| 📊 Exploratory Data Analysis | `Boxplot`, Стратифицированный sampling, `UMAP`, Корреляционный анализ |
-| 🏗 Feature Engineering | `StandardScaler`, Отбор признаков, Анализ важности            |
-| 🕵 Anomaly Detection | `One-Class SVM`                                                |
-| 🤖 Модели классификации | `KNN`, `RandomForestClassifier`, `Logistic Regression`      |
-| 🔁 Ансамблирование     | Усреднение вероятностей, Оптимизация порога                  |
-| 📏 Метрики            | `Recall`, `Precision`, `F1`, `ROC-AUC`, `Confusion Matrix`   |
+```
 
 ---
 
-## 📊 Результаты
+## 🧠 Methods & Tools
 
-| Метрика                | Значение |
-|------------------------|----------|
-| **Recall (Fraud)**     | 0.82     |
-| **Precision (Fraud)**  | 0.86     |
-| **F1-score (Fraud)**   | 0.84     |
-| **ROC AUC (общий)**    | 0.96     |
-| **False Negatives**    | 13       |
-| **False Positives**    | 10       |
-
-> 📌 Модель показывает высокую отзывчивость (recall) и отличную AUC даже при сильном дисбалансе (fraud < 0.2%).
+| Category                | Techniques and Tools Used                                      |
+|------------------------|---------------------------------------------------------------|
+| 📊 Exploratory Analysis | `Boxplot`, Stratified sampling, `UMAP`, Correlation analysis  |
+| 🏗 Feature Engineering  | `StandardScaler`, Feature selection, Feature importance        |
+| 🕵 Anomaly Detection    | `One-Class SVM`                                                |
+| 🤖 Classification       | `KNN`, `RandomForestClassifier`, `LogisticRegression`          |
+| 🔁 Ensembling           | Averaging probabilities, Threshold optimization               |
+| 📏 Evaluation Metrics   | `Recall`, `Precision`, `F1`, `ROC-AUC`, `Confusion Matrix`     |
 
 ---
 
-## 🚀 Быстрый старт
+## 📊 Results
 
-1. Установи зависимости:
+| Metric                   | Value  |
+|--------------------------|--------|
+| **Recall (Fraud)**       | 0.82   |
+| **Precision (Fraud)**    | 0.86   |
+| **F1-score (Fraud)**     | 0.84   |
+| **ROC AUC (Overall)**    | 0.96   |
+| **False Negatives (FN)** | 13     |
+| **False Positives (FP)** | 10     |
+
+> 📌 The model demonstrates high recall and AUC despite the class imbalance (fraud < 0.2%).
+
+---
+
+## 🚀 Quick Start
+
+1. Clone the repository and install dependencies:
 ```bash
 git clone https://github.com/your-username/creditcard-fraud-detection.git
 cd creditcard-fraud-detection
 pip install -r requirements.txt
 
-2. Обработай данные:
+2. Preprocess the data:
 jupyter notebook notebooks/02_Feature_Engineering.ipynb
 
-3. Обучи ансамбль:
+3. Train the ensemble:
 jupyter notebook notebooks/03_Baseline_Classification_Model.ipynb
 
-4. Проверь финальные метрики:
+4. Evaluate final metrics:
 jupyter notebook notebooks/04_Final_Model_Evaluation.ipynb
-
+```
 ---
 
-## 🔭 Возможности для расширения
+## 🔭 Future Enhancements
 
-### 🧠 Модели и гиперпараметры
-- 🎛 Реализовать **тонкую настройку гиперпараметров** моделей:
-  - `LogisticRegression` — `penalty`, `C`, `solver`
-  - `KNeighborsClassifier` — `n_neighbors`, `weights`, `metric`
-  - `RandomForestClassifier` — `n_estimators`, `max_depth`, `class_weight`
-- 🧪 Подключить **GridSearchCV** или `Optuna` для автоматического подбора параметров
+### 🧠 Model and Hyperparameter Tuning
 
-### ⏱ Моделирование временных паттернов
-- 🧩 Построить **Time-aware модель**, учитывающую:
-  - Временные интервалы между транзакциями (Time-delta features)
-  - Сезонные/суточные паттерны
-  - Скользящие окна (`rolling mean`, `lag features`)
-- 📈 Построить **временные профили клиентов**
+- 🎛 Implement **fine-tuning of model hyperparameters**:
+  - `LogisticRegression`: `penalty`, `C`, `solver`
+  - `KNeighborsClassifier`: `n_neighbors`, `weights`, `metric`
+  - `RandomForestClassifier`: `n_estimators`, `max_depth`, `class_weight`
+- 🧪 Use **GridSearchCV** or `Optuna` for automated parameter optimization
 
-### 📊 Интерпретируемость
-- 🧠 Подключить **SHAP** для глобального и локального объяснения решений модели
-- 🧪 Добавить **LIME** для точечных интерпретаций на тестовых примерах
-- 💡 Генерировать отчёты "почему транзакция считается мошеннической?"
+### ⏱ Temporal Pattern Modeling
 
-### 🛰 Деплой и API
-- 🚀 Реализовать **FastAPI-сервер**:
-  - Загрузка обученной модели
-  - Предсказания по REST API
-  - Визуализация метрик и логов в Swagger UI
+- 🧩 Develop a **time-aware model** that accounts for:
+  - Time intervals between transactions (`time_delta` features)
+  - Seasonal and daily patterns
+  - Rolling statistics (`rolling mean`, `lag features`)
+- 📈 Build **customer behavior profiles** over time
 
-### 🧮 Метрики и оценка
-- 📉 Обновить фокус с ROC AUC на **PR AUC** (Precision-Recall Area Under Curve)
-- ⚖ Особенно актуально при **экстремальном дисбалансе классов**
-- 📌 Добавить cost-based метрики: например, оценка стоимости FN vs FP
+### 📊 Interpretability
+
+- 🧠 Integrate **SHAP** for both global and local interpretability
+- 🧪 Add **LIME** for instance-specific explanations
+- 💡 Generate clear reports explaining why a transaction was flagged as fraudulent
+
+### 🛰 Deployment and API
+
+- 🚀 Build a **FastAPI server** to:
+  - Load the trained model
+  - Serve predictions via REST API
+  - Display metrics and logs via Swagger UI
+
+### 🧮 Metrics and Evaluation
+
+- 📉 Shift the focus from ROC AUC to **PR AUC (Precision-Recall AUC)**, more suitable for imbalanced data
+- ⚖ Incorporate **cost-sensitive metrics**, such as evaluating the cost of False Negatives (FN) vs False Positives (FP)
 
 ### 🏷 Feature Engineering
-- 🧬 Использовать больше признаков на базе `OneClassSVM`:
-  - `is_anomaly` как бинарный флаг
-  - `decision_function` как `anomaly_score`
-  - `rank` по степени аномальности
-- 🔬 Более тщательно проанализировать переменные:
-  - `Time` — ввести признаки `hour`, `delta_time`, `time_since_last_tx`
-  - `Amount` — логарифмирование, масштабирование, binning
+
+- 🧬 Derive additional features from `One-Class SVM`:
+  - `is_anomaly`: binary anomaly flag
+  - `decision_function`: continuous anomaly score
+  - `rank`: anomaly ranking based on score
+- 🔬 Further enhance features like:
+  - `Time`: extract `hour`, `delta_time`, `time_since_last_tx`
+  - `Amount`: apply log transformation, scaling, and binning
 
 ---
